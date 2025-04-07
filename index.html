@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notification Demo</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #121212;
+      color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+    button {
+      padding: 15px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      background: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+<button id="notifyBtn">Show Notification</button>
+
+<script>
+  const notifyBtn = document.getElementById('notifyBtn');
+
+  notifyBtn.addEventListener('click', async () => {
+    // First ask for permission
+    if (Notification.permission === "granted") {
+      showNotification();
+    } else if (Notification.permission !== "denied") {
+      const permission = await Notification.requestPermission();
+      if (permission === "granted") {
+        showNotification();
+      }
+    }
+  });
+
+  function showNotification() {
+    new Notification("Hello 👋", {
+      body: "This is your browser notification!",
+      icon: "https://cdn-icons-png.flaticon.com/512/1827/1827272.png" // Optional icon
+    });
+  }
+</script>
+
+</body>
+</html>
