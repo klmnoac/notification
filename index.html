@@ -1,111 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Student Form</title>
-  <style>
-    body {
-      background-color: #000;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      font-family: Arial, sans-serif;
-    }
-    .container {
-      background-color: #1e1e1e;
-      padding: 20px;
-      border-radius: 10px;
-      width: 100%;
-      max-width: 400px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    }
-    input, select, button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 5px;
-      background-color: #2c2c2c;
-      color: white;
-      font-size: 16px;
-    }
-    button {
-      background-color: #3498db;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #2980b9;
-    }
-    .list {
-      margin-top: 20px;
-    }
-    .item {
-      background: #2c2c2c;
-      padding: 10px;
-      margin-top: 5px;
-      border-radius: 5px;
-    }
-  </style>
+    <title>Submit Data</title>
+    <style>
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            margin: auto;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
-
-<div class="container">
-  <h1 style="text-align:center;">Student Form</h1>
-  <form id="dataForm">
-    <input type="text" id="name" placeholder="Name" required>
-    <input type="number" id="age" placeholder="Age" required>
-    <select id="course" required>
-      <option value="">Select Course</option>
-      <option>Math</option>
-      <option>Science</option>
-      <option>English</option>
-      <option>History</option>
-      <option>Computer</option>
-    </select>
-    <button type="submit">Submit</button>
-  </form>
-
-  <div id="dataList" class="list">
-    <!-- Submitted data will show here -->
-  </div>
-</div>
-
-<script>
-const form = document.getElementById('dataForm');
-
-// 👉 Paste your Web App URL here
-const scriptURL = 'https://script.google.com/macros/s/AKfycbzfiP4kPFYsCRHs1a3fK9gYZYBRVY42ixZiho0Wy9iZjZ5h2Dhy4UnlaPy0OQ86KkB2/exec';
-
-form.addEventListener('submit', e => {
-  e.preventDefault();
-
-  const data = {
-    name: document.getElementById('name').value,
-    age: document.getElementById('age').value,
-    course: document.getElementById('course').value
-  };
-
-fetch(scriptURL, {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(data)
-})
-
-  .then(response => response.json())
-  .then(res => {
-    alert('Data Saved!');
-    form.reset(); // Clear form
-  })
-  .catch(error => {
-    console.error('Error!', error.message);
-  });
-});
-</script>
-
+    <h1>Submit Data to Google Sheet</h1>
+    <form id="data-form">
+        <input type="text" id="name" placeholder="Name" required />
+        <input type="text" id="subject" placeholder="Subject" required />
+        <input type="text" id="grade" placeholder="Grade" required />
+        <button type="submit">Submit</button>
+    </form>
+    <p id="response"></p>
+    <script src="script.js"></script>
 </body>
 </html>
